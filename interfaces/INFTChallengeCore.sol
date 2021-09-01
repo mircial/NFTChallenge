@@ -13,4 +13,6 @@ interface INFTChallengeCore {
         uint256 tokenId
         ) external returns(bool);
 
+    
+
 }

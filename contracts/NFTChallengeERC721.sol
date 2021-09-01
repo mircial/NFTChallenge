@@ -36,12 +36,12 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         _;
     }
     
-    function balanceOf(address owner) public view virtual override returns (uint256) {
+    function balanceOf(address owner) public view override returns (uint256) {
         require(owner != address(0), "ERC721: balance query for the zero address");
         return _balances[owner];
     }
 
-    function ownerOf(uint256 tokenId) public view virtual override returns (address) {
+    function ownerOf(uint256 tokenId) public view override returns (address) {
         address owner = _owners[tokenId];
         require(owner != address(0), "ERC721: owner query for nonexistent token");
         return owner;
@@ -69,7 +69,6 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         _operatorApprovals[msg.sender][operator] = approved;
         emit ApprovalForAll(msg.sender, operator, approved);
     }
-
 
     function isApprovedForAll(address owner, address operator) public view override returns (bool) {
         return _operatorApprovals[owner][operator];
@@ -201,13 +200,13 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
 
     
     // See {IERC165-supportsInterface}
-    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view override returns (bool) {
         return
             interfaceId == type(IERC721).interfaceId ||
             interfaceId == type(INFTChallengeERC721).interfaceId;
     }  
 
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
         string memory baseURI = _baseURI();
