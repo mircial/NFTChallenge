@@ -2,33 +2,16 @@
 
 pragma solidity ^0.8.0;
 
-import "./IERC721.sol";
-
-interface INFTChallengeFactory is IERC721{
-    //// events
-    event Mint(address indexed to, uint256 indexed tokenId);
-    event Burn(uint256 indexed tokenId);
-
-    //// metadata extension
-    function name() external view returns (string memory);
-    function symbol() external view returns (string memory);
-    function tokenURI(uint256 tokenId) external view returns (string memory);
-
-    //// enumeration extension
-    function totalSupply() external view returns (uint256);
-    function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256 tokenId);
-    function tokenByIndex(uint256 index) external view returns (uint256);
-
+interface INFTChallengeFactory{
     //// 
-    function mint(address to, uint256 tokenId) external;
-    function burn(uint256 tokenId) external;
+    event ItemCreated(uint256 indexed itemId, address item, uint);
 
+    function Creator() external view returns (address);
 
+    function getItem(uint256) external view returns (address item);
+    function allItems(uint) external view returns (address item);
+    function allItemsLength() external view returns (uint);
 
-    //// application functions
-    function NFTExist(
-        address contract_address, 
-        address user,
-        uint256 tokenId
-        ) external returns(bool);
+    function createItem(uint256 itemId) external returns (address item);
+
 }
