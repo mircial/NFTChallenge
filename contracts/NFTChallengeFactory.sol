@@ -11,21 +11,32 @@ import "./extension/ERC721.sol";
 contract NFTChallengeFactory is ERC721, INFTChallengeFactory {
 
     using Strings for uint256;
+    using Address for address;  
 
     string private _name;
     string private _symbol;
+    address public minter;
 
     mapping(address => mapping(uint256 => uint256)) private _ownedTokens;
     mapping(uint256 => uint256) private _ownedTokensIndex;
     uint256[] private _allTokens;
     mapping(uint256 => uint256) private _allTokensIndex;
 
+    mapping(address => mapping(uint256 => address)) private _StoreTokenId;
+
+
     constructor(string memory name_, string memory symbol_) 
         ERC721(name_, symbol_) {
         _name = name_;
         _symbol = symbol_;
+        minter = msg.sender;
     }
     
+    modifier OnlyMinter{
+        require(msg.sender == minter, 'Only minter can invoke!');
+        _;
+    }
+
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, IERC165) returns (bool) {
         return
             interfaceId == type(INFTChallengeFactory).interfaceId ||
@@ -40,19 +51,25 @@ contract NFTChallengeFactory is ERC721, INFTChallengeFactory {
         return _symbol;
     }
 
-    function mint(address to, uint256 tokenId) external override {
+    function mint(address to, uint256 tokenId) external override  OnlyMinter {
        // @dev
-        ERC721._mint(to, tokenId);
+        require(_exists(tokenId), 'tokenId minted!');
+        _mint(to, tokenId);
+
+        emit Mint(to, tokenId);
+
     }
 
     function burn(uint256 tokenId) external override {
         //solhint-disable-next-line max-line-length
-        require(ERC721._isApprovedOrOwner(msg.sender, tokenId), "ERC721Burnable: caller is not owner nor approved");
-        ERC721._burn(tokenId);
+        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721Burnable: caller is not owner nor approved");
+        _burn(tokenId);
+
+        emit Burn(tokenId);
     }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(ERC721._exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
         string memory baseURI = _baseURI();
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
@@ -63,7 +80,7 @@ contract NFTChallengeFactory is ERC721, INFTChallengeFactory {
     }
 
     function tokenOfOwnerByIndex(address owner, uint256 index) public view virtual override returns (uint256) {
-        require(index < ERC721.balanceOf(owner), "ERC721Enumerable: owner index out of bounds");
+        require(index < balanceOf(owner), "ERC721Enumerable: owner index out of bounds");
         return _ownedTokens[owner][index];
     }
 
@@ -96,7 +113,7 @@ contract NFTChallengeFactory is ERC721, INFTChallengeFactory {
     }
 
     function _addTokenToOwnerEnumeration(address to, uint256 tokenId) private {
-        uint256 length = ERC721.balanceOf(to);
+        uint256 length = balanceOf(to);
         _ownedTokens[to][length] = tokenId;
         _ownedTokensIndex[tokenId] = length;
     }
@@ -108,7 +125,7 @@ contract NFTChallengeFactory is ERC721, INFTChallengeFactory {
 
     function _removeTokenFromOwnerEnumeration(address from, uint256 tokenId) private {
 
-        uint256 lastTokenIndex = ERC721.balanceOf(from) - 1;
+        uint256 lastTokenIndex = balanceOf(from) - 1;
         uint256 tokenIndex = _ownedTokensIndex[tokenId];
 
         // When the token to delete is the last token, the swap operation is unnecessary
@@ -138,6 +155,17 @@ contract NFTChallengeFactory is ERC721, INFTChallengeFactory {
         delete _allTokensIndex[tokenId];
         _allTokens.pop();
     }
-
     
+    function NFTExist(
+        address contract_address, 
+        address user, 
+        uint256 tokenId
+    ) external override returns(bool){
+
+        require(contract_address.isContract() == true, 'contract address does not exist!');
+        require(ERC721(contract_address).ownerOf(tokenId) == user, 'Invalid user');
+        require(_StoreTokenId[contract_address][tokenId] == address(0),' tokenId used!');
+        _StoreTokenId[contract_address][tokenId] = user;
+        return true;
+    }
 }

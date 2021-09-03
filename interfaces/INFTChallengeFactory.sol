@@ -22,4 +22,13 @@ interface INFTChallengeFactory is IERC721{
     //// 
     function mint(address to, uint256 tokenId) external;
     function burn(uint256 tokenId) external;
+
+
+
+    //// application functions
+    function NFTExist(
+        address contract_address, 
+        address user,
+        uint256 tokenId
+        ) external returns(bool);
 }
