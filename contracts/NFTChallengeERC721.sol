@@ -25,9 +25,8 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
 
     mapping(address => mapping(uint256 => uint256)) private _ownedTokens;
     mapping(uint256 => uint256) private _ownedTokensIndex;
-    uint256[] private _allTokens;
+    uint256[] private _allTokens; //totalsupply
     mapping(uint256 => uint256) private _allTokensIndex;
-    mapping(address => mapping(uint256 => address)) private _StoreTokenId;
 
     function balanceOf(address owner) public view override returns (uint256) {
         require(owner != address(0), "ERC721: balance query for the zero address");
@@ -83,11 +82,6 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         _safeTransfer(from, to, tokenId, _data);
     }
 
-
-
-
-
-
     function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal {
         _transfer(from, to, tokenId);
         require(_checkOnERC721Received(from, to, tokenId, _data), "ERC721: transfer to non ERC721Receiver implementer");
@@ -136,7 +130,7 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         );
     }
 
-    function _mint(address to, uint256 tokenId) internal {
+    function _mint(address to, uint256 tokenId) internal virtual  {
         require(to != address(0), "ERC721: mint to the zero address");
         require(!_exists(tokenId), "ERC721: token already minted");
 
@@ -148,7 +142,7 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         emit Transfer(address(0), to, tokenId);
     }
 
-    function _burn(uint256 tokenId) internal {
+    function _burn(uint256 tokenId) internal virtual {
         address owner = ownerOf(tokenId);
 
         _beforeTokenTransfer(owner, address(0), tokenId);
@@ -180,7 +174,7 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         }
     }
 
-    function supportsInterface(bytes4 interfaceId) public pure virtual override returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return
             interfaceId == type(INFTChallengeERC721).interfaceId;
     }
@@ -224,15 +218,15 @@ contract NFTChallengeERC721 is INFTChallengeERC721 {
         }
     }
 
+    function _addTokenToAllTokensEnumeration(uint256 tokenId) private {
+        _allTokensIndex[tokenId] = _allTokens.length;
+        _allTokens.push(tokenId);
+    }
+
     function _addTokenToOwnerEnumeration(address to, uint256 tokenId) private {
         uint256 length = balanceOf(to);
         _ownedTokens[to][length] = tokenId;
         _ownedTokensIndex[tokenId] = length;
-    }
-
-    function _addTokenToAllTokensEnumeration(uint256 tokenId) private {
-        _allTokensIndex[tokenId] = _allTokens.length;
-        _allTokens.push(tokenId);
     }
 
     function _removeTokenFromOwnerEnumeration(address from, uint256 tokenId) private {

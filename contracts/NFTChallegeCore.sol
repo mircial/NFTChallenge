@@ -9,12 +9,12 @@ import "../interfaces/IERC721.sol";
 /**
  * add extension
  */
-contract NFTChallegeCore is INFTChallegeCore, NFTChallengeERC721 {
+contract NFTChallegeCore is NFTChallengeERC721, INFTChallegeCore{
     using Address for address;
 
     mapping(address => mapping(uint256 => address)) private _StoreTokenId;
 
-    function supportsInterface(bytes4 interfaceId) public pure override returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view override(NFTChallengeERC721, INFTChallengeERC721) returns (bool) {
         return
             interfaceId == type(INFTChallegeCore).interfaceId ||
             super.supportsInterface(interfaceId);
@@ -48,5 +48,17 @@ contract NFTChallegeCore is INFTChallegeCore, NFTChallengeERC721 {
         require(_StoreTokenId[contract_address][tokenId] == address(0),' tokenId used!');
         _StoreTokenId[contract_address][tokenId] = user;
         return true;
+    }
+
+    function UserQuery(uint256 tokenId) public override returns(bool){  
+        require(_exists(tokenId),'tokenId used'); 
+        emit Query(tokenId);
+        return true;
+    }
+
+    function UserApply(address contract_address, address user, uint256 tokenId) public override{
+        require(UserQuery(tokenId),'token has been taken away');
+        emit Apply(tokenId);
+        transferFrom(contract_address, user, tokenId);
     }
 }
