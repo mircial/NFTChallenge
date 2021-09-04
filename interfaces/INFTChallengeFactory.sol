@@ -8,10 +8,11 @@ interface INFTChallengeFactory{
 
     function Creator() external view returns (address);
 
+    function managers(address) external view returns (address item);
     function getItem(uint256) external view returns (address item);
     function allItems(uint) external view returns (address item);
     function allItemsLength() external view returns (uint);
 
-    function createItem(uint256 itemId) external returns (address item);
+    function createItem(address manager, uint256 itemId) external returns (address item);
 
 }
