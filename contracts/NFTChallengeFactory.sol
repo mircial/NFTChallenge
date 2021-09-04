@@ -41,7 +41,7 @@ contract NFTChallengeFactory is INFTChallengeFactory {
         }
         */
 
-        /// new way
+        /// new method
         bytes32 salt = keccak256(abi.encodePacked(itemId));
         item = address( new NFTChallegeCore{salt: salt}(manager) );
 
