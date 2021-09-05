@@ -7,7 +7,9 @@ import "./INFTChallengeERC721.sol";
 interface INFTChallegeCore is INFTChallengeERC721 {
 
     //// 
-    function manager() external view returns(address);
+    function owner() external view returns(address);
+    function ApproveForMint(address) external;
+    function isApprovedForMint(address) external view returns(bool);
 
     function mint(address to, uint256 tokenId) external returns(bool);
     function safeMint(address to, uint256 tokenId) external;

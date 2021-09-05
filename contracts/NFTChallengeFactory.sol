@@ -14,7 +14,7 @@ contract NFTChallengeFactory is INFTChallengeFactory {
 
     mapping(uint256 => address) public override getItem;
     address[] public override allItems;
-    mapping(address => address) public override managers;
+    mapping(address => address) public override owners;
 
     constructor() {
         Creator = msg.sender;
@@ -29,7 +29,7 @@ contract NFTChallengeFactory is INFTChallengeFactory {
         return allItems.length;
     }
 
-    function createItem(address manager, uint256 itemId) external override onlyCreator returns (address item) {
+    function createItem(address owner, uint256 itemId) external override onlyCreator returns (address item) {
         require(getItem[itemId] == address(0), "This itemId is used, Please change another one.");
 
         //// create a contract ref to uniswap
@@ -43,9 +43,9 @@ contract NFTChallengeFactory is INFTChallengeFactory {
 
         /// new method
         bytes32 salt = keccak256(abi.encodePacked(itemId));
-        item = address( new NFTChallegeCore{salt: salt}(manager) );
+        item = address( new NFTChallegeCore{salt: salt}(owner) );
 
-        managers[item] = manager;
+        owners[item] = owner;
         getItem[itemId] = item;
         allItems.push(item);
         emit ItemCreated(itemId, item, allItems.length);
