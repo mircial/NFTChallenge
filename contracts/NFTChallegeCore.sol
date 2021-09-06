@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-import "../interfaces/INFTChallegeCore.sol";
+import "./interfaces/INFTChallegeCore.sol";
 import "./NFTChallengeERC721.sol";
-import "../interfaces/IERC721.sol";
+import "./interfaces/IERC721.sol";
 
 /**
  * add extension

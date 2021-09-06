@@ -2,10 +2,10 @@
 
 pragma solidity ^0.8.0;
 
-import "../interfaces/INFTChallengeERC721.sol";
-import '../interfaces/IERC721Receive.sol';
-import "../libraries/Address.sol";
-import "../libraries/Strings.sol";
+import "./interfaces/INFTChallengeERC721.sol";
+import './interfaces/IERC721Receive.sol';
+import "./libraries/Address.sol";
+import "./libraries/Strings.sol";
 
 /**
  * INFTChallengeERC721 includes ERC721 and some extension.
