@@ -2,100 +2,130 @@ App = {
   web3Provider: null,
   contracts: {},
 
-  init: function() {
-    // Load pets.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
+  init: async function() {
+    $.getJSON('../items.json', function(data) {
+      var itemsRow = $('#itemsRow');
+      var itemTemplate = $('#itemTemplate');
 
       for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
-        petsRow.append(petTemplate.html());
+        itemTemplate.find('.panel-title').text(data[i].name);
+        itemTemplate.find('img').attr('src', data[i].picture_false);
+        itemTemplate.find('.affiliation').text(data[i].Affiliation);
+        itemTemplate.find('.tokenId').text("--");
+        itemTemplate.find('.classification').text(data[i].Classification);
+        itemTemplate.find('.state').text("--");
+        // itemTemplate.find('.btn-apply').attr('data-id', data[i].id);
+        itemsRow.append(itemTemplate.html());
       }
     });
-
-    return App.initWeb3();
+    return await App.initWeb3();
   },
-
-  initWeb3: function() {
-    // Is there an injected web3 instance ?
-    if (typeof web3 !== 'undefined') {
-      App.web3Provider = web3.currentProvider;
+  initWeb3: async function() {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+      App.web3Provider = window.ethereum;
+      try {
+        // Request account access
+        await window.ethereum.enable();
+      } catch (error) {
+        // User denied account access...
+        console.error("User denied account access")
+      }
     }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      App.web3Provider = window.web3.currentProvider;
+    }
+    // If no injected web3 instance is detected, fall back to Ganache
     else {
-      //// If no injected web3 instance is detected, fall back to Ganache
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
-
     web3 = new Web3(App.web3Provider);
     return App.initContract();
   },
 
   initContract: function() {
-    $.getJSON('Adoption.json', function(data) {
-      App.contracts.Adoption = TruffleContract(data);
+    $.getJSON('CollectNFT.json', function(data) {
+      App.contracts.CollectNFT = TruffleContract(data);
       // Set the provider for our contract
-      App.contracts.Adoption.setProvider(App.web3Provider);
-      // Use our contract to retrieve and mark the adopted pets
-      return App.markAdopted();
-    });
-
+      App.contracts.CollectNFT.setProvider(App.web3Provider);  
+    });   
     return App.bindEvents();
   },
 
   bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    $('#connect').on('click',App.handleConnectWallet);
+    $('#apply').on('click', App.handleApplyNFT);
   },
 
-  markAdopted: function(adopters, account) {
-    var adoptionInstance;
+  handleConnectWallet: async function(event) {
 
-App.contracts.Adoption.deployed().then(function(instance) {
-  adoptionInstance = instance;
-  return adoptionInstance.getAdopters();
-}).then(function(adopters) {
-  for (i = 0; i < adopters.length; i++) {
-    if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
-      $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
-    }
-  }
-}).catch(function(err) {
-  console.log(err.message);
-});
-  },
+      event.preventDefault();
+      var CollectNFTInstance;
 
-  handleAdopt: function(event) {
-    event.preventDefault();
+      web3.eth.getAccounts(function(error, accounts) {
+        if (error) {
+          console.log(error);
+        }
 
-    var petId = parseInt($(event.target).data('id'));
+        var account = accounts[0];
+        $('#connect').text(account);
+        
+        App.contracts.CollectNFT.deployed().then(function(instance) {
+          CollectNFTInstance = instance;
+          return CollectNFTInstance.totalItems();
+        }).then(function(result){
+          return  App.render();
+        }).catch(function(err) {
+          console.log(err.message);
+        });
+        });
+      },
 
-    var adoptionInstance;
+  handleApplyNFT: async function(event) {
+        event.preventDefault();
 
-  web3.eth.getAccounts(function(error, accounts) {
-    if (error) {
-      console.log(error);
-    }
+        var TokenId = 0;
+        var CollectNFTInstance;
 
-    var account = accounts[0];
-    
-      App.contracts.Adoption.deployed().then(function(instance) {
-        adoptionInstance = instance;
+      web3.eth.getAccounts(function(error, accounts) {
+        if (error) {
+          console.log(error);
+        }
 
-        // Execute adopt as a transaction by sending account
-        return adoptionInstance.adopt(petId, {from: account});
-      }).then(function(result) {
-        return App.markAdopted();
-      }).catch(function(err) {
-        console.log(err.message);
-      });
+        var account = accounts[0];
+        
+        App.contracts.CollectNFT.deployed().then(function(instance) {
+          CollectNFTInstance = instance;
+          return CollectNFTInstance.core();
+
+        }).then(function(result){
+          return CollectNFTInstance.ApplyNFT(result, TokenId, {from: account});
+          
+        }).catch(function(err) {
+          console.log(err.message);
+        });
+        });
+      },
+
+  render: function() {
+    $.getJSON('../items.json', function(data) {
+      var itemsRow = $('#itemsRow');
+      var itemTemplate = $('#itemTemplate');
+
+      for (i = 0; i < data.length; i ++) {
+        itemTemplate.find('.panel-title').text(data[i].name);
+        itemTemplate.find('img').attr('src', data[i].picture_true);
+        itemTemplate.find('.affiliation').text(data[i].Affiliation);
+        itemTemplate.find('.tokenId').text(data[i].tokenId);
+        itemTemplate.find('.classification').text(data[i].Classification);
+        itemTemplate.find('.state').text("Possessed!");
+        // itemTemplate.find('.btn-apply').attr('data-id', data[i].id);
+        itemsRow.append(itemTemplate.html());
+      }
     });
-  }
+      },
+  
 };
 
 $(function() {

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 0,
+    "name": "NFT",
+    "picture_true": "images/artblocks.png",
+    "picture_false": "images/artblocks_f.png",
+    "tokenId": 1,
+    "Affiliation": "artblocks",
+    "classification": "Art"
+  },
+  {
+    "id": 1,
+    "name": "NFT",
+    "picture_true": "images/blitmap.png",
+    "picture_false": "images/blitmap_f.png",
+    "tokenId": 13,
+    "Affiliation": "blitmap",
+    "classification": "Art"
+  },
+  {
+    "id": 2,
+    "name": "NFT",
+    "picture_true": "images/superrare.png",
+    "picture_false": "images/superrare_f.png",
+    "tokenId": 12,
+    "Affiliation": "superrare",
+    "classification": "Art"
+  },
+  {
+    "id": 3,
+    "name": "NFT",
+    "picture_true": "images/boredapeclub.png",
+    "picture_false": "images/boredapeclub_f.png",
+    "tokenId": 25,
+    "Affiliation": "boredapeclub",
+    "classification": "Avatar"
+  },
+  {
+    "id": 4,
+    "name": "NFT",
+    "picture_true": "images/CryptoKitties.png",
+    "picture_false": "images/CryptoKitties_f.png",
+    "tokenId": 4325,
+    "Affiliation": "CryptoKitties",
+    "classification": "Game"
+  },
+  {
+    "id": 5,
+    "name": "NFT",
+    "picture_true": "images/ethereum.png",
+    "picture_false": "images/ethereum_f.png",
+    "tokenId": 326,
+    "Affiliation": "ethereum",
+    "classification": "Coin"
+  },
+  {
+    "id": 6,
+    "name": "NFT",
+    "picture_true": "images/hashmasks.png",
+    "picture_false": "images/hashmasks_f.png",
+    "tokenId": 18,
+    "Affiliation": "hashmasks",
+    "classification": "Art"
+  },
+  {
+    "id": 7,
+    "name": "NFT",
+    "picture_true": "images/veefriends.png",
+    "picture_false": "images/veefriends_f.png",
+    "tokenId": 9876,
+    "Affiliation": "veefriends",
+    "classification": "Game"
+  }
+]
