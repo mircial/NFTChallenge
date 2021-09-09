@@ -42,12 +42,12 @@ module.exports = {
       provider: () => setupWallet('http://localhost:8545'),
       network_id: 0x4e454153,
       gas: 10000000,
-      from: '0x6A33382de9f73B846878a57500d055B981229ac4'
+      from: '0x256807C23d5085ad22CC124c00852eE60989fC3E'
     },
     ropsten: {
       provider: () => setupWallet(`https://ropsten.infura.io/v3/${process.env.INFURA_TOKEN}`),
       network_id: 0x3,
-      from: '0x6A33382de9f73B846878a57500d055B981229ac4',
+      from: '0x256807C23d5085ad22CC124c00852eE60989fC3E',
       gas: 3 * 1000000,
       gasPrice: utils.toWei('8', 'gwei')
     }

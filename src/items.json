@@ -5,7 +5,7 @@
     "picture_true": "images/artblocks.png",
     "picture_false": "images/artblocks_f.png",
     "tokenId": 1,
-    "Affiliation": "artblocks",
+    "Affiliation": "Artblocks",
     "classification": "Art"
   },
   {
@@ -14,7 +14,7 @@
     "picture_true": "images/blitmap.png",
     "picture_false": "images/blitmap_f.png",
     "tokenId": 13,
-    "Affiliation": "blitmap",
+    "Affiliation": "Blitmap",
     "classification": "Art"
   },
   {
@@ -23,7 +23,7 @@
     "picture_true": "images/superrare.png",
     "picture_false": "images/superrare_f.png",
     "tokenId": 12,
-    "Affiliation": "superrare",
+    "Affiliation": "Superrare",
     "classification": "Art"
   },
   {
@@ -32,7 +32,7 @@
     "picture_true": "images/boredapeclub.png",
     "picture_false": "images/boredapeclub_f.png",
     "tokenId": 25,
-    "Affiliation": "boredapeclub",
+    "Affiliation": "Boredapeclub",
     "classification": "Avatar"
   },
   {
@@ -50,7 +50,7 @@
     "picture_true": "images/ethereum.png",
     "picture_false": "images/ethereum_f.png",
     "tokenId": 326,
-    "Affiliation": "ethereum",
+    "Affiliation": "Ethereum",
     "classification": "Coin"
   },
   {
@@ -59,7 +59,7 @@
     "picture_true": "images/hashmasks.png",
     "picture_false": "images/hashmasks_f.png",
     "tokenId": 18,
-    "Affiliation": "hashmasks",
+    "Affiliation": "Hashmasks",
     "classification": "Art"
   },
   {
@@ -68,7 +68,7 @@
     "picture_true": "images/veefriends.png",
     "picture_false": "images/veefriends_f.png",
     "tokenId": 9876,
-    "Affiliation": "veefriends",
+    "Affiliation": "Veefriends",
     "classification": "Game"
   }
 ]

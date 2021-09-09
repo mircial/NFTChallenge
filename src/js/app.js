@@ -6,13 +6,14 @@ App = {
     $.getJSON('../items.json', function(data) {
       var itemsRow = $('#itemsRow');
       var itemTemplate = $('#itemTemplate');
+      $('#apply').attr('disabled', true);
 
       for (i = 0; i < data.length; i ++) {
-        itemTemplate.find('.panel-title').text(data[i].name);
+        itemTemplate.find('.panel-title').text(data[i].Affiliation);
         itemTemplate.find('img').attr('src', data[i].picture_false);
-        itemTemplate.find('.affiliation').text(data[i].Affiliation);
+        // itemTemplate.find('.affiliation').text(data[i].Affiliation);
         itemTemplate.find('.tokenId').text("--");
-        itemTemplate.find('.classification').text(data[i].Classification);
+        itemTemplate.find('.classification').text(data[i].classification);
         itemTemplate.find('.state').text("--");
         // itemTemplate.find('.btn-apply').attr('data-id', data[i].id);
         itemsRow.append(itemTemplate.html());
@@ -83,10 +84,10 @@ App = {
       },
 
   handleApplyNFT: async function(event) {
-        event.preventDefault();
+      event.preventDefault();
 
-        var TokenId = 0;
-        var CollectNFTInstance;
+      var TokenId = 0;
+      var CollectNFTInstance;
 
       web3.eth.getAccounts(function(error, accounts) {
         if (error) {
@@ -99,9 +100,11 @@ App = {
           CollectNFTInstance = instance;
           return CollectNFTInstance.core();
 
-        }).then(function(result){
-          return CollectNFTInstance.ApplyNFT(result, TokenId, {from: account});
-          
+        }).then(function(result){         
+          return CollectNFTInstance.ApplyNFT(result, TokenId, {from: account});  
+        }).then(function(state){
+          if(state) 
+            return App.updateApplyState();
         }).catch(function(err) {
           console.log(err.message);
         });
@@ -111,20 +114,27 @@ App = {
   render: function() {
     $.getJSON('../items.json', function(data) {
       var itemsRow = $('#itemsRow');
+      var itemsRowRender = $('#itemsRowRender');
       var itemTemplate = $('#itemTemplate');
+      $('#apply').attr('disabled', false);
+      itemsRow.hide();
 
       for (i = 0; i < data.length; i ++) {
-        itemTemplate.find('.panel-title').text(data[i].name);
+        itemTemplate.find('.panel-title').text(data[i].Affiliation);
         itemTemplate.find('img').attr('src', data[i].picture_true);
-        itemTemplate.find('.affiliation').text(data[i].Affiliation);
+        // itemTemplate.find('.affiliation').text(data[i].Affiliation);
         itemTemplate.find('.tokenId').text(data[i].tokenId);
-        itemTemplate.find('.classification').text(data[i].Classification);
+        itemTemplate.find('.classification').text(data[i].classification);
         itemTemplate.find('.state').text("Possessed!");
         // itemTemplate.find('.btn-apply').attr('data-id', data[i].id);
-        itemsRow.append(itemTemplate.html());
+        itemsRowRender.append(itemTemplate.html());
       }
     });
-      },
+  },
+      
+  updateApplyState: function() {
+    $('#apply').text('Success').attr('disabled', true);
+  },
   
 };
 
