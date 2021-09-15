@@ -11,6 +11,7 @@ import "./NFTChallegeCore.sol";
 contract NFTChallengeFactory is INFTChallengeFactory {
 
     address public override Creator;
+    uint private itemId;
 
     mapping(uint256 => address) public override getItem;
     address[] public override allItems;
@@ -29,7 +30,8 @@ contract NFTChallengeFactory is INFTChallengeFactory {
         return allItems.length;
     }
 
-    function createItem(address owner, uint256 itemId) external override onlyCreator returns (address item) {
+    function createItem(address owner) external override returns (address item) {
+
         require(getItem[itemId] == address(0), "This itemId is used, Please change another one.");
 
         //// create a contract ref to uniswap
@@ -48,7 +50,10 @@ contract NFTChallengeFactory is INFTChallengeFactory {
         owners[item] = owner;
         getItem[itemId] = item;
         allItems.push(item);
+        itemId +=1;
         emit ItemCreated(itemId, item, allItems.length);
+
+        return item;
     }
     
 }

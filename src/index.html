@@ -9,69 +9,188 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
-          <h1 class="text-center">NFT Collect!</h1>
-          <hr/>
-          <br/>
-        </div>
-      </div>
-
-      <button type="button_connect" id="connect" data-loading-text="Loading..." class="btn btn-primary">
-        Connect Wallet
-      </button>
-      <p></p>
-
-      <div id="itemsRow" class="row">
-        <!-- ITEMS LOAD HERE -->
-      </div>
-      <p></p>
-      <div id="itemsRowRender" class="rowrender">
-        <!-- ITEMS LOAD HERE -->
-      </div>
-      <p></p>
-
-      <button type="button_apply" id="apply" style="background: beige; color: rgb(255, 0, 98)" class="btn btn-default btn-adopt">
-        Apply
-      </button>
-      <p></p>
-
-    </div>
-
-    <div id="itemTemplate" style="display: none;">
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-item">
-          <div class="panel-heading">
-            <h3 class="panel-title">NFT</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
-            <br/><br/>
-            <!-- <strong>Affiliation</strong>: <span class="affiliation">balabala</span><br/> -->
-            <strong>Classification</strong>: <span class="classification">Game</span><br/><br/>
-            <strong>TokenId</strong>: <span id= "tokenid" class="tokenId">0</span><br/>
-            <strong>State</strong>: <span id="token-state" class="state">--</span><br/><br/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/app.js"></script>
+
+    <link media="screen,projection" rel="stylesheet" type="text/css" href="css/screen.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="css/print.css" />
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/slides.min.jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+
+  </head>
+  <body>
+
+    <div id="header">
+      <div class="wrap clearfix logoAndMenu">
+        <h1 class="logo"><a href="/"><img src="images/nc_logo.png" style="width: 20%;" alt="NFTChallenge Logo" /></a></h1>
+        <div class="mainNav clearfix">
+          <div class="mainNavLeft"></div>
+          <div class="mainNavCenter">
+            <ul class="clearfix">
+              <li class="navActive"><a href="index.html"><span>HOME</span></a></li>
+              <li><a href="#"><span>ABOUT</span></a></li>
+              <li><a href="#"><span>PORTFOLIO</span></a></li>
+              <li><a href="#"><span>BLOG</span></a></li>
+              <li><a href="#"><span>CONTACT</span></a></li>
+            </ul>
+          </div>
+          <div class="mainNavRight"></div>
+        </div><!--mainNav-->
+      </div><!--wrap-->
+    </div><!--header-->
+
+    <div id="content" class="wrap clearfix">
+      <div class="imgSliderContainer">
+          <div class="imgSlider">
+          <div class="imgSliderC">
+            <div>
+              <img src="contents/rock.jpeg" alt="slider 1" style="height: 100%; width: 100%;"/>
+              <section>
+                <h2>ROCK ITEM 1</h2>
+                <p>NFT can be used to prove the ownership of many tangible or intangible assets, such as music, artwork, virtual world wearable equipment, and items in games.</p>
+              </section>
+              <a href="#" class="imgSliderPrev imgSliderTextPrev"></a>
+              <a href="#" class="imgSliderNext imgSliderTextNext"></a>
+            </div>
+            <div>
+              <img src="contents/art.jpeg" alt="slider 2" style="height: 100%; width: 100%;"/>
+              <section>
+                <h2>LIGHT ITEM 2</h2>
+                <p>NFT can be used to prove the ownership of many tangible or intangible assets, such as music, artwork, virtual world wearable equipment, and items in games.</p>
+              </section>
+              <a href="#" class="imgSliderPrev imgSliderTextPrev"></a>
+              <a href="#" class="imgSliderNext imgSliderTextNext"></a>
+            </div>
+            <div>
+              <img src="contents/amd.jpeg" alt="slider 3" style="height: 100%; width: 100%;"/>
+              <section>
+                <h2>CHIP ITEM 3</h2>
+                <p>NFT can be used to prove the ownership of many tangible or intangible assets, such as music, artwork, virtual world wearable equipment, and items in games.</p>
+              </section>
+              <a href="#" class="imgSliderPrev imgSliderTextPrev"></a>
+              <a href="#" class="imgSliderNext imgSliderTextNext"></a>
+            </div>
+          </div><!--imgSliderC-->
+          
+          <a class="imgSliderPrev" href="#">Prev</a>
+          <a class="imgSliderNext" href="#">Next</a>
+          
+          <div class="imgSliderPaginationContainer clearfix" style="margin-left: -95px;">
+            <div class="imgSliderPaginationContainerLeft"></div>
+            <div class="imgSliderPaginationContainerCenter">
+              <ul class="imgSliderPagination clearfix">
+                <li class="imgSliderCurrent"><a href="#0">1</a></li>
+                <li><a href="#1">2</a></li>
+                <li><a href="#2">3</a></li>
+              </ul>
+            </div>	
+            <div class="imgSliderPaginationContainerRight"></div>
+          </div><!--imgSliderPaginationContainer-->
+          
+        </div><!--imgSlider-->
+      </div><!--imgSliderContainer-->
+      
+      <div class="sliderBottomPattern"></div>
+      
+      <div class="areaTitle"><h5>RECENT ITEMS</h5></div>
+      <div class="recentWorks clearfix">
+        <div class="work">
+          <img src="contents/artblocks.png" alt="artblocks" style="height: 40%; width: 100%;"/>
+          <div class="underWorkImg clearfix">
+            <h3 id="item-name">Your Item</h3>
+            <a href="#"><span>230</span></a>
+          </div>
+          <ul class="workInfo" id='item1'>
+            <li>Deployed By: <span style="color: black;" class='mana'>--</span></li>
+            <li>Launched Time: <span style="color: black;" class="time">--</span></li>
+            <li>View Link: <a href="" id='link_url'>--</a></li>
+          </ul>
+          <div class="moreLink">
+            <span>MORE</span>
+            <a href="#">More</a>
+          </div>
+        </div><!--work-->
+        <div class="work">
+          <img src="contents/boredapeclub.png" alt="boredapeclub" style="height: 40%; width: 100%;"/>
+          <div class="underWorkImg clearfix">
+            <h3>BOREDAPECLUB</h3>
+            <a href="#"><span>230</span></a>
+          </div>
+          <ul class="workInfo" id='item2'>
+            <li>Deployed By: <span style="color: black;" class='mana'>0xa7d3...98fj</span></li>
+            <li>Launched Time: <span style="color: black;" class='mana'>Jun - 3 - 2021</span></li>
+            <li>View Link: <a href="#">boredapeclub.com</a></li>
+          </ul>
+          <div class="moreLink">
+            <span>MORE</span>
+            <a href="#">More</a>
+          </div>
+        </div><!--work-->
+        <div class="work">
+          <img src="contents/superrare.png" alt="superrare" style="height: 40%; width: 100%;"/>
+          <div class="underWorkImg clearfix">
+            <h3>SUPERRARE</h3>
+            <a href="#"><span>325</span></a>
+          </div>
+          <ul class="workInfo" id = 'item3'>
+            <li>Deployed By: <a href="#">0x5gf8...gur4</a></li>
+            <li>Launched Time: <a href="#">Mar - 18 - 2021</a></li>
+            <li>View Link: <a href="#">superrare.com</a></li>
+          </ul>
+          <div class="moreLink">
+            <span>MORE</span>
+            <a href="#">More</a>
+          </div>
+        </div><!--work-->
+      </div><!--recentWorks-->
+      
+      <div class="freeQuote clearfix" style="justify-content: space-between">
+        <p>Create Your <span>Item</span> Using Our Platform !</p>
+        <button type="button" style='float: right; font-size: 20px;' 
+                class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          CreateItem
+        </button>
+      </div><!--freeQuote-->
+    </div><!--content-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Create Your Item</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="item_name" class="control-label">Item Name:</label>
+                <input type="text" class="form-control" id="item_name">
+              </div>
+              <div class="form-group">
+                <label for="manager" class="control-label">Manager:</label>
+                <input type="text" class="form-control" id="manager">
+              </div>
+              <div class="form-group">
+                <label for="url" class="control-label">URL:</label>
+                <input type="text" class="form-control" id="url">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="create">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

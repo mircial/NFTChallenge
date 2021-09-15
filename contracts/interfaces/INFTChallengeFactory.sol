@@ -14,6 +14,6 @@ interface INFTChallengeFactory{
     function allItems(uint) external view returns (address item);
     function allItemsLength() external view returns (uint);
 
-    function createItem(address manager, uint256 itemId) external returns (address item);
+    function createItem(address manager) external returns (address item);
 
 }

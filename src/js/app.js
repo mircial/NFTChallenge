@@ -3,22 +3,6 @@ App = {
   contracts: {},
 
   init: async function() {
-    $.getJSON('../items.json', function(data) {
-      var itemsRow = $('#itemsRow');
-      var itemTemplate = $('#itemTemplate');
-      $('#apply').attr('disabled', true);
-
-      for (i = 0; i < data.length; i ++) {
-        itemTemplate.find('.panel-title').text(data[i].Affiliation);
-        itemTemplate.find('img').attr('src', data[i].picture_false);
-        // itemTemplate.find('.affiliation').text(data[i].Affiliation);
-        itemTemplate.find('.tokenId').text("--");
-        itemTemplate.find('.classification').text(data[i].classification);
-        itemTemplate.find('.state').text("--");
-        // itemTemplate.find('.btn-apply').attr('data-id', data[i].id);
-        itemsRow.append(itemTemplate.html());
-      }
-    });
     return await App.initWeb3();
   },
   initWeb3: async function() {
@@ -46,95 +30,51 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON('CollectNFT.json', function(data) {
-      App.contracts.CollectNFT = TruffleContract(data);
+    $.getJSON('NFTChallengeFactory.json', function(data) {
+      App.contracts.NFTChallengeFactory = TruffleContract(data);
       // Set the provider for our contract
-      App.contracts.CollectNFT.setProvider(App.web3Provider);  
+      App.contracts.NFTChallengeFactory.setProvider(App.web3Provider);  
     });   
     return App.bindEvents();
   },
 
   bindEvents: function() {
-    $('#connect').on('click',App.handleConnectWallet);
-    $('#apply').on('click', App.handleApplyNFT);
+    $('#exampleModal').on('click',App.handleCreateItem);
   },
 
-  handleConnectWallet: async function(event) {
-
+  handleCreateItem: async function(event) {
+    event.preventDefault();
+    
+    var item_name = await $('#item_name').val();
+    var manager = await $('#manager').val();
+    var url = await $('#url').val();
+    
+    $('#create').off('click');
+    $('#create').on('click', function(event){
       event.preventDefault();
-      var CollectNFTInstance;
-
+    
       web3.eth.getAccounts(function(error, accounts) {
         if (error) {
           console.log(error);
-        }
-
-        var account = accounts[0];
-        $('#connect').text(account);
-        
-        App.contracts.CollectNFT.deployed().then(function(instance) {
-          CollectNFTInstance = instance;
-          return CollectNFTInstance.totalItems();
+        };
+        // console.log(accounts[0]);
+        App.contracts.NFTChallengeFactory.deployed().then(function(instance) {
+          return instance.createItem(manager,{from: accounts[0]});
         }).then(function(result){
-          return  App.render();
+          var mana = manager.substr(0, 6) + '...'+ manager.substr(38, 42);
+          $('#item-name').text(item_name);
+          $('#item1').find('.mana').text(mana);
+          $('#item1').find('.time').text('Sep - 15 - 2021');
+          $('#link_url').attr('href',url);
+          $('#link_url').text(url);
+          $('#exampleModal').hide();
         }).catch(function(err) {
-          console.log(err.message);
+          console.log(err.messager);
         });
         });
-      },
-
-  handleApplyNFT: async function(event) {
-      event.preventDefault();
-
-      var TokenId = 0;
-      var CollectNFTInstance;
-
-      web3.eth.getAccounts(function(error, accounts) {
-        if (error) {
-          console.log(error);
-        }
-
-        var account = accounts[0];
-        
-        App.contracts.CollectNFT.deployed().then(function(instance) {
-          CollectNFTInstance = instance;
-          return CollectNFTInstance.core();
-
-        }).then(function(result){         
-          return CollectNFTInstance.ApplyNFT(result, TokenId, {from: account});  
-        }).then(function(state){
-          if(state) 
-            return App.updateApplyState();
-        }).catch(function(err) {
-          console.log(err.message);
-        });
-        });
-      },
-
-  render: function() {
-    $.getJSON('../items.json', function(data) {
-      var itemsRow = $('#itemsRow');
-      var itemsRowRender = $('#itemsRowRender');
-      var itemTemplate = $('#itemTemplate');
-      $('#apply').attr('disabled', false);
-      itemsRow.hide();
-
-      for (i = 0; i < data.length; i ++) {
-        itemTemplate.find('.panel-title').text(data[i].Affiliation);
-        itemTemplate.find('img').attr('src', data[i].picture_true);
-        // itemTemplate.find('.affiliation').text(data[i].Affiliation);
-        itemTemplate.find('.tokenId').text(data[i].tokenId);
-        itemTemplate.find('.classification').text(data[i].classification);
-        itemTemplate.find('.state').text("Possessed!");
-        // itemTemplate.find('.btn-apply').attr('data-id', data[i].id);
-        itemsRowRender.append(itemTemplate.html());
-      }
     });
-  },
-      
-  updateApplyState: function() {
-    $('#apply').text('Success').attr('disabled', true);
-  },
+
+    },
   
 };
 
