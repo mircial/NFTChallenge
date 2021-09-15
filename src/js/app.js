@@ -60,14 +60,13 @@ App = {
         // console.log(accounts[0]);
         App.contracts.NFTChallengeFactory.deployed().then(function(instance) {
           return instance.createItem(manager,{from: accounts[0]});
-        }).then(function(result){
+        }).then(async function(result){
           var mana = manager.substr(0, 6) + '...'+ manager.substr(38, 42);
-          $('#item-name').text(item_name);
-          $('#item1').find('.mana').text(mana);
-          $('#item1').find('.time').text('Sep - 15 - 2021');
-          $('#link_url').attr('href',url);
-          $('#link_url').text(url);
-          $('#exampleModal').hide();
+          await $('#item-name').text(item_name);
+          await $('#item1').find('.mana').text(mana);
+          await $('#item1').find('.time').text('Sep - 15 - 2021');
+          await $('#link_url').attr('href',url);
+          await $('#link_url').text(url);
         }).catch(function(err) {
           console.log(err.messager);
         });
