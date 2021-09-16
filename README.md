@@ -1,16 +1,17 @@
 # NFTChallenge Introduction
 
-NFTChallenge(NC) is a widely interconnected platform where any project party can depoly their contracts and any user can join to play whatever project they want. The project party can easily mint NFTs to eligible users.
+NFTChallenge(NFTC) is an interactive platform where any NFT Project (referred to as third NFTP in the following context) can depoly its contract. On NFTC, any user can join to have fun with any NFTP and eligible users can easily mint.
 
-On this platform, all projects are integrated with their own NFTs and those NFTs can be shared with each other. The project party can build a new project with the help of other existing projects. The user's NFTs in each item are not isolated. NC encourages users to use the NFTs of other items to complete the tasks required under a current project.
+On NFTC, all NFTPs are integrated with their own NFTs and can be shared with each other. NFTP can also build projects with the help of other existing NFTP. The user's NFTs in each item are not isolated. NFTC encourages user to use the NFTs of other NFTPs to complete the tasks required under a current project.
 
-NC makes NFTs truly have circulation value. Besides, it will play a vital role in the metaverse.
+NFTC makes NFTs truly have circulation value. Besides, it will play a vital role in the metaverse.
 
 ## Installing Prerequisites
 
-This repo assumes that you have Node.js 12+ and Yarn. Please refer to the [Yarn installation how-to](https://classic.yarnpkg.com/en/docs/install) if you don't yet have the `yarn` command installed locally.
+Node.js 12+ and Yarn are required to use this repo. 
+Please refer to the [Yarn installation how-to](https://classic.yarnpkg.com/en/docs/install) if you don't yet have the `yarn` command installed locally.
 
-To install the prerequisite packages,  clone the  repository and then run `yarn`:
+To install the prerequisite packages,  clone the repository and then run `yarn`:
 
 ### Install Truffle
 
@@ -54,7 +55,7 @@ aurora: {
 },
 ```
 
- The  `truffle-config.js` configuration will pick up your `MNEMONIC` environment variable and recover the address that will be used for sending and signing transactions on the Aurora network.
+ The  `truffle-config.js` configuration will read your `MNEMONIC` environment variable and recover the address that will be used for sending or signing transactions on the Aurora network.
 
 ## Deploying Contracts
 
@@ -103,18 +104,18 @@ yarn deploy:aurora
 
 ## Interface
 
-The front-end doesn't use a build system (webpack, grunt, etc.) to be as easy as possible to get started. 
+A mature front-end (webpack, grunt, etc.) was not used so as to get from scratch as easy as possible. 
 
-Open another ternminal and Run the `liteserver` development server (outside the development console) for front-end hot reloading. Smart contract changes must be manually recompiled and migrated. It serves the front-end on http://localhost:3000
+Open ternminal and Run `liteserver` development server (outside the development console) for front-end hot reloading. Smart contract changes must be manually recompiled and migrated. Open http://localhost:3000 for the web contents.
 
 ```bash
 yarn dev
 ```
 
-**note**: By far, we just finished a simply work to show how our platform NFTChallenge runs. Further more, you can go to our [examples](https://github.com/mircial/CollectNFT) for more details.
+**note**: By far, we just finished a simple work to show how NFTC runs. For more details, go to [examples](https://github.com/mircial/CollectNFT).
 
 ## Summary
 
-Above all, NC is an awesome platform for both developers and customs. Anyone can depoly their contracts and everyone can play it.  For more details, you can see our slices.
+Above all, NFTC is an awesome platform for both developers and players. Anyone can depoly their contracts and anyone can have fun with it. For more details, please kindly refer to our slides.
 
-Make Metaverse more wonderful, make NFT more valuable!
+To Make Metaverse More Wonderful. To Make NFT More Valuable!
