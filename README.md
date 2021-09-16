@@ -21,7 +21,7 @@ npm install -g truffle
 ### Install dependencies
 
 ```bash
-git clone https://github.com/MetaBUILD/NFTChallenge.git
+git clone https://github.com/Lone513/NFTChallenge.git
 
 cd NFTChallenge
 
@@ -40,7 +40,7 @@ Now in `truffle-config.js`, you will need to change the `from` address as shown
 
 below in the `aurora` network section:
 
-```json
+```bash
 aurora: {
 
   provider: () => setupWallet('https://testnet.aurora.dev'),
@@ -101,18 +101,7 @@ yarn deploy:aurora
 ....
 ```
 
-## Example
-
-CollectNFT contract is a simple example to be deployed at our platform. This project becomes one item to our platform and does not need to program ERC721 code. It just focus on how to design wonderful actions. Our platform help create NFT core code for each one item who is deployed at this platform.
-
-This example describes that if a user collected all the NFTs, he will get a medal of honor. It sounds like the collect card game we played when we were young.
-
-**note**: Before we interact with this contract, we need some pre-steps. See code to learn how to complete them firstly.
-
-1. NFTChallegeCore needs to approve this example to mint NFTs.
-2. CollectNFT needs to add some Items what it wants user to collect.
-
-## Interface for CollectNFT example
+## Interface
 
 The front-end doesn't use a build system (webpack, grunt, etc.) to be as easy as possible to get started. 
 
@@ -122,7 +111,7 @@ Open another ternminal and Run the `liteserver` development server (outside the 
 yarn dev
 ```
 
-**note**: By far, we just finished a simply version to show how the CollectNFT example run. For tokenId, we default use the first if the use has more than one.
+**note**: By far, we just finished a simply work to show how our platform NFTChallenge runs. Further more, you can go to our [examples](https://github.com/Lone513/CollectNFT) for more details.
 
 ## Summary
 
