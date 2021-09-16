@@ -21,7 +21,7 @@ npm install -g truffle
 ### Install dependencies
 
 ```bash
-git clone https://github.com/Lone513/NFTChallenge.git
+git clone https://github.com/mircial/NFTChallenge.git
 
 cd NFTChallenge
 
@@ -111,7 +111,7 @@ Open another ternminal and Run the `liteserver` development server (outside the 
 yarn dev
 ```
 
-**note**: By far, we just finished a simply work to show how our platform NFTChallenge runs. Further more, you can go to our [examples](https://github.com/Lone513/CollectNFT) for more details.
+**note**: By far, we just finished a simply work to show how our platform NFTChallenge runs. Further more, you can go to our [examples](https://github.com/mircial/CollectNFT) for more details.
 
 ## Summary
 
