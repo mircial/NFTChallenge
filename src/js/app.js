@@ -52,7 +52,8 @@ App = {
     $('#create').off('click');
     $('#create').on('click', function(event){
       event.preventDefault();
-    
+      console.log('a');
+      
       web3.eth.getAccounts(function(error, accounts) {
         if (error) {
           console.log(error);
@@ -65,8 +66,9 @@ App = {
           await $('#item-name').text(item_name);
           await $('#item1').find('.mana').text(mana);
           await $('#item1').find('.time').text('Sep - 15 - 2021');
-          await $('#link_url').attr('href',url);
           await $('#link_url').text(url);
+          await $('#link_url').text(url);
+          await $('#link_url').attr('href',url);
         }).catch(function(err) {
           console.log(err.messager);
         });
