@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "./INFTChallengeERC721.sol";
 
-interface INFTChallegeCore is INFTChallengeERC721 {
+interface INFTChallengeCore is INFTChallengeERC721 {
 
     //// 
     function owner() external view returns(address);

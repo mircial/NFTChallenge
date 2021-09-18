@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 import "./interfaces/INFTChallengeFactory.sol";
-import "./NFTChallegeCore.sol";
+import "./NFTChallengeCore.sol";
 
 /**
  * 
@@ -45,7 +45,7 @@ contract NFTChallengeFactory is INFTChallengeFactory {
 
         /// new method
         bytes32 salt = keccak256(abi.encodePacked(itemId));
-        item = address( new NFTChallegeCore{salt: salt}(owner) );
+        item = address( new NFTChallengeCore{salt: salt}(owner) );
 
         owners[item] = owner;
         getItem[itemId] = item;

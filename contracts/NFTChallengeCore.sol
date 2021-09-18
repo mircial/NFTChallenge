@@ -2,14 +2,14 @@
 
 pragma solidity ^0.8.0;
 
-import "./interfaces/INFTChallegeCore.sol";
+import "./interfaces/INFTChallengeCore.sol";
 import "./NFTChallengeERC721.sol";
 import "./interfaces/IERC721.sol";
 
 /**
  * add extension
  */
-contract NFTChallegeCore is NFTChallengeERC721, INFTChallegeCore{
+contract NFTChallengeCore is NFTChallengeERC721, INFTChallengeCore{
 
     address public override owner;
     mapping(address => bool) public approve_mint;
@@ -39,7 +39,7 @@ contract NFTChallegeCore is NFTChallengeERC721, INFTChallegeCore{
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(NFTChallengeERC721, INFTChallengeERC721) returns (bool) {
         return
-            interfaceId == type(INFTChallegeCore).interfaceId ||
+            interfaceId == type(INFTChallengeCore).interfaceId ||
             super.supportsInterface(interfaceId);
     }
 

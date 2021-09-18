@@ -44,6 +44,8 @@ App = {
 
   handleCreateItem: async function(event) {
     event.preventDefault();
+
+    var Factory;
     
     var item_name = await $('#item_name').val();
     var manager = await $('#manager').val();
@@ -52,7 +54,6 @@ App = {
     $('#create').off('click');
     $('#create').on('click', function(event){
       event.preventDefault();
-      console.log('a');
       
       web3.eth.getAccounts(function(error, accounts) {
         if (error) {
@@ -60,15 +61,14 @@ App = {
         };
         // console.log(accounts[0]);
         App.contracts.NFTChallengeFactory.deployed().then(function(instance) {
-          return instance.createItem(manager,{from: accounts[0]});
+          Factory = instance;
+          return Factory.createItem(manager,{from: accounts[0]});
         }).then(async function(result){
           var mana = manager.substr(0, 6) + '...'+ manager.substr(38, 42);
           await $('#item-name').text(item_name);
           await $('#item1').find('.mana').text(mana);
           await $('#item1').find('.time').text('Sep - 15 - 2021');
           await $('#link_url').text(url);
-          await $('#link_url').text(url);
-          await $('#link_url').attr('href',url);
         }).catch(function(err) {
           console.log(err.messager);
         });
